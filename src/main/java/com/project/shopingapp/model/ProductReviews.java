@@ -7,6 +7,7 @@ import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Getter
@@ -35,7 +36,7 @@ public class ProductReviews {
     private String review;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
-    private Date creationDate;
+    private LocalDateTime creationDate;
 
     private Boolean status;
 }

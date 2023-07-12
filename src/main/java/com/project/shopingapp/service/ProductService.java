@@ -54,6 +54,10 @@ public class ProductService {
         return productDtoConverter.convert(productRepository.findById(id).orElse(null));
     }
 
+    public Product findProductById(Long id){
+        return productRepository.findById(id).orElse(null);
+    }
+
     public ProductDto createProduct(CreateProductRequest createProductRequest) {
         Category category = categoryService.findCustomerById(createProductRequest.getCategoryId());
 
@@ -81,5 +85,9 @@ public class ProductService {
 
         return productDtoConverter.convert(productRepository.save(product));
 
+    }
+    public void deleteProductById(Long id) {
+
+        productRepository.deleteById(id);
     }
 }

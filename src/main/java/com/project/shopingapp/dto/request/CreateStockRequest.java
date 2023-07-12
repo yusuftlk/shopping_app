@@ -1,4 +1,5 @@
-package com.project.shopingapp.dto;
+package com.project.shopingapp.dto.request;
+
 import lombok.*;
 
 @Getter
@@ -6,11 +7,9 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@ToString
-@EqualsAndHashCode
-public class StockDto {
+public class CreateStockRequest {
     private Long id;
-    private ProductDto product;
+    private Long ProductId;
     private Integer count;
     private String store;
 }

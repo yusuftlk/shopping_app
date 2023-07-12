@@ -67,4 +67,8 @@ public class UserAddressService {
 
         return userAddressList.stream().map(userAddressDtoConverter::converter).collect(Collectors.toList());
     }
+
+    public UserAddress findUserAddressById(Long userAddressId) {
+        return userAddressRepository.findById(userAddressId).orElse(null);
+    }
 }

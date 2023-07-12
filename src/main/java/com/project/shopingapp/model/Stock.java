@@ -22,7 +22,7 @@ public class Stock {
     @JsonIgnore
     private Product product;
 
-    private int count;
+    private Integer count;
 
     private String store;
 }

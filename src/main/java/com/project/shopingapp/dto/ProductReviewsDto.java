@@ -1,7 +1,9 @@
 package com.project.shopingapp.dto;
 
+import com.project.shopingapp.model.Product;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Getter
@@ -13,9 +15,9 @@ import java.util.Date;
 @EqualsAndHashCode
 public class ProductReviewsDto {
     private Long id;
-    private Long productId;
-    private Long userId;
+    private ProductDto product;
+    private UserDto user;
     private String review;
-    private Date creationDate;
+    private LocalDateTime creationDate;
     private Boolean status;
 }

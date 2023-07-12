@@ -16,12 +16,15 @@ import org.hibernate.annotations.OnDeleteAction;
 public class ProductImage {
     @Id
     private Long id;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private Product product;
-    private String image;
+    private String name;
+    private String type;
+    @Lob
+    @Column(length = 1000)
+    private byte[] image;
 
 }
