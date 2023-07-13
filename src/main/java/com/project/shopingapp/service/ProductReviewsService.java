@@ -33,7 +33,7 @@ public class ProductReviewsService {
         Product product = productService.findProductById(createProductReviewRequest.getProductId());
         User user = userService.findUserById(createProductReviewRequest.getUserId());
 
-        ProductReviews productReviews = new ProductReviews(createProductReviewRequest.getId(),
+        ProductReviews productReviews = new ProductReviews(null,
                 product,
                 user,
                 createProductReviewRequest.getReview(),

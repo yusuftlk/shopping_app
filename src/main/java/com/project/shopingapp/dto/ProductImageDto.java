@@ -11,8 +11,6 @@ import lombok.*;
 @ToString
 @EqualsAndHashCode
 public class ProductImageDto {
-
-    private Long id;
-    private Product product;
     private String image;
+    private String name;
 }

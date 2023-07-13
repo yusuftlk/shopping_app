@@ -9,7 +9,6 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class CreateUserAddressRequest {
-    private Long id;
     private Long userId;
     private String addressText;
     private String city;

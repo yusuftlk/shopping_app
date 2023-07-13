@@ -14,10 +14,6 @@ import java.util.Date;
 @ToString
 @EqualsAndHashCode
 public class ProductReviewsDto {
-    private Long id;
-    private ProductDto product;
     private UserDto user;
     private String review;
-    private LocalDateTime creationDate;
-    private Boolean status;
 }

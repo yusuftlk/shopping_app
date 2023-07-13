@@ -9,10 +9,10 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder
 public class CreateProductRequest {
-    private Long id;
     private Long categoryId;
     private String productCode;
     private String name;
     private Float price;
+    private Integer stock;
     private String description;
 }

@@ -42,7 +42,7 @@ public class OrderService {
         System.out.println(product.getName());
         System.out.println(userAddress.getAddressText());
 
-        Order order = new Order(createOrderRequest.getId(),
+        Order order = new Order(null,
                 user,
                 userAddress,
                 product,

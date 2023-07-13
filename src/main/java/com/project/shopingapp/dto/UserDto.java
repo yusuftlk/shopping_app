@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -13,11 +14,8 @@ import java.time.LocalDateTime;
 @ToString
 @EqualsAndHashCode
 public class UserDto {
-    private Long id;
     private String name;
     private String surname;
     private String number;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
-    private LocalDateTime creationDate;
-    private Boolean status;
+    private List<UserAddressDto> userAddressDtoList;
 }

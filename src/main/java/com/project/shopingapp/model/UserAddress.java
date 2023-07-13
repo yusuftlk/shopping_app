@@ -15,10 +15,10 @@ import org.hibernate.annotations.OnDeleteAction;
 @Table(name = "useraddress")
 public class UserAddress {
     @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private User user;
     @Lob
@@ -27,5 +27,10 @@ public class UserAddress {
     private String city;
     private String district;
 
-
+    public UserAddress(User user, String addressText, String city, String district) {
+        this.user = user;
+        this.addressText = addressText;
+        this.city = city;
+        this.district = district;
+    }
 }

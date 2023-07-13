@@ -10,8 +10,6 @@ import lombok.*;
 @ToString
 @EqualsAndHashCode
 public class UserAddressDto {
-    private Long id;
-    private UserDto user;
     private String addressText;
     private String city;
     private String district;

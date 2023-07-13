@@ -1,9 +1,12 @@
 package com.project.shopingapp.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.project.shopingapp.model.ProductImage;
+import com.project.shopingapp.model.ProductReviews;
 import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -13,13 +16,13 @@ import java.util.Date;
 @ToString
 @EqualsAndHashCode
 public class ProductDto {
-    private Long id;
     private CategoryDto category;
     private String productCode;
     private String name;
     private Float price;
+    private Integer stock;
     private String description;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
-    private LocalDateTime creationDate;
-    private Boolean status;
+    private List<ProductReviewsDto> productReviews;
+
+    private List<ProductImageDto> productImages;
 }

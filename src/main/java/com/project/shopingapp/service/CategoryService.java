@@ -36,7 +36,7 @@ public class CategoryService {
     }
 
     public CategoryDto createCategory(CreateCategoryRequest createCategoryRequest) {
-        Category category = new Category(createCategoryRequest.getId(),
+        Category category = new Category(null,
                 createCategoryRequest.getCategoryName(),
                 LocalDateTime.now(),
                 true);

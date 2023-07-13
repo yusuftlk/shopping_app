@@ -19,6 +19,7 @@ import java.util.Date;
 @Table(name = "productreviews")
 public class ProductReviews {
     @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id", nullable = false)
@@ -39,4 +40,13 @@ public class ProductReviews {
     private LocalDateTime creationDate;
 
     private Boolean status;
+
+    public ProductReviews(Product product, User user, String review, LocalDateTime creationDate, Boolean status) {
+        this.id = null;
+        this.product = product;
+        this.user = user;
+        this.review = review;
+        this.creationDate = creationDate;
+        this.status = status;
+    }
 }

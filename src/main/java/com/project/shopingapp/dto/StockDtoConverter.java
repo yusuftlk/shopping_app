@@ -12,8 +12,7 @@ public class StockDtoConverter {
     }
 
     public StockDto convert(Stock from){
-        return new StockDto(from.getId(),
-                productDtoConverter.convert(from.getProduct()),
+        return new StockDto(productDtoConverter.convert(from.getProduct()),
                 from.getCount(),
                 from.getStore());
     }

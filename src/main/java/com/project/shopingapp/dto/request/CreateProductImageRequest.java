@@ -10,6 +10,5 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class CreateProductImageRequest {
-    private Long id;
     private Long productId;
 }

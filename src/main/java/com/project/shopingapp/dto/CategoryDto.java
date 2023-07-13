@@ -14,9 +14,5 @@ import java.util.Date;
 @ToString
 @EqualsAndHashCode
 public class CategoryDto {
-    private Long id;
     private String categoryName;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
-    private LocalDateTime creationDate;
-    private Boolean status;
 }

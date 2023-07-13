@@ -8,6 +8,6 @@ import java.time.LocalDateTime;
 @Component
 public class CategoryDtoConverter {
     public CategoryDto convert(Category from){
-        return new CategoryDto(from.getId(), from.getCategoryName(), LocalDateTime.now(), true);
+        return new CategoryDto(from.getCategoryName());
     }
 }

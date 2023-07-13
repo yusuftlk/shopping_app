@@ -5,6 +5,7 @@ import com.project.shopingapp.dto.UserDtoConverter;
 import com.project.shopingapp.dto.request.CreateUserRequest;
 import com.project.shopingapp.dto.request.UpdateUserRequest;
 import com.project.shopingapp.model.User;
+import com.project.shopingapp.model.UserAddress;
 import com.project.shopingapp.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -27,14 +28,14 @@ public class UserService {
     }
 
     public UserDto createUser(CreateUserRequest createUserRequest) {
-        User user = new User(createUserRequest.getId(),
-                createUserRequest.getName(),
+        User user = new User(createUserRequest.getName(),
                 createUserRequest.getSurname(),
                 createUserRequest.getNumber(),
                 createUserRequest.getEmail(),
                 createUserRequest.getPassword(),
                 LocalDateTime.now(),
                 true);
+
         return userDtoConverter.convert(userRepository.save(user));
     }
 
@@ -59,6 +60,7 @@ public class UserService {
     }
 
     public User findUserById(Long userId) {
-        return userRepository.findById(userId).orElse(null);
+
+        return userRepository.findById(userId).orElseThrow(null);
     }
 }

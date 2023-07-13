@@ -25,7 +25,7 @@ public class StockService {
     public StockDto createStock(CreateStockRequest createStockRequest) {
         Product product = productService.findProductById(createStockRequest.getProductId());
 
-        Stock stock = new Stock(createStockRequest.getId(),
+        Stock stock = new Stock(null,
                 product,
                 createStockRequest.getCount(),
                 createStockRequest.getStore());

@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder
 public class CreateOrderRequest {
-    private Long id;
     private Long userId;
     private Long userAddressId;
     private Long productId;

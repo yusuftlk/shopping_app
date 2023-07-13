@@ -15,6 +15,7 @@ import org.hibernate.annotations.OnDeleteAction;
 @Table(name = "stock")
 public class Stock {
     @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id", nullable = false)
@@ -25,4 +26,10 @@ public class Stock {
     private Integer count;
 
     private String store;
+
+    public Stock(Product product, Integer count, String store) {
+        this.product = product;
+        this.count = count;
+        this.store = store;
+    }
 }

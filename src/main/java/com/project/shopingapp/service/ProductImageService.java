@@ -20,21 +20,4 @@ public class ProductImageService {
         this.productImageRepository = productImageRepository;
         this.productService = productService;
     }
-
-    public ProductImage createProductImage(MultipartFile file) throws IOException {
-        Product product = productService.findProductById(Long.parseLong("1"));
-
-        ProductImage pImage = new ProductImage();
-        pImage.setId(Long.parseLong("1"));
-        pImage.setName(file.getOriginalFilename());
-        pImage.setType(file.getContentType());
-        pImage.setProduct(product);
-        pImage.setImage(ImageUtil.compressImage(file.getBytes()));
-        return productImageRepository.save(pImage);
-    }
-
-    public byte[] getProductImageById(Long id) {
-        Optional<ProductImage> imageData = productImageRepository.findById(id);
-        return ImageUtil.decompressImage(imageData.get().getImage());
-    }
 }

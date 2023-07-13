@@ -28,7 +28,7 @@ public class UserAddressService {
 
     public UserAddressDto createUserAddress(CreateUserAddressRequest createUserAddressRequest) {
         User user = userService.findUserById(createUserAddressRequest.getUserId());
-        UserAddress userAddress = new UserAddress(createUserAddressRequest.getId(),
+        UserAddress userAddress = new UserAddress(null,
                 user,
                 createUserAddressRequest.getAddressText(),
                 createUserAddressRequest.getCity(),

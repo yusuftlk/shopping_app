@@ -61,14 +61,14 @@ public class ProductService {
     public ProductDto createProduct(CreateProductRequest createProductRequest) {
         Category category = categoryService.findCustomerById(createProductRequest.getCategoryId());
 
-        Product product = new Product(createProductRequest.getId(),
+        Product product = new Product(
                 category,
                 createProductRequest.getProductCode(),
                 createProductRequest.getName(),
                 createProductRequest.getPrice(),
                 createProductRequest.getDescription(),
                 LocalDateTime.now(),
-                true);
+                true, createProductRequest.getStock());
 
         return productDtoConverter.convert(productRepository.save(product));
     }

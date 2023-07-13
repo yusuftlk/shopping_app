@@ -12,11 +12,9 @@ import java.util.Date;
 @ToString
 @EqualsAndHashCode
 public class OrderDto {
-    private Long id;
     private UserDto user;
     private UserAddressDto userAddress;
     private ProductDto product;
     private String information;
     private LocalDateTime orderDate;
-    private Boolean status;
 }

@@ -17,12 +17,10 @@ public class OrderDtoConverter {
     }
 
     public OrderDto convert(Order from){
-        return new OrderDto(from.getId(),
-                userDtoConverter.convert(from.getUser()),
+        return new OrderDto(userDtoConverter.convert(from.getUser()),
                 userAddressDtoConverter.converter(from.getUserAddress()),
                 productDtoConverter.convert(from.getProduct()),
                 from.getInformation(),
-                from.getOrderDate(),
-                from.getStatus());
+                from.getOrderDate());
     }
 }

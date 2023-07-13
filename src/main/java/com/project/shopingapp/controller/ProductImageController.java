@@ -19,15 +19,5 @@ public class ProductImageController {
     public ProductImageController(ProductImageService productImageService) {
         this.productImageService = productImageService;
     }
-    @PostMapping()
-    public ProductImage createProductImage(@RequestParam("productImage")MultipartFile file) throws IOException{
-        return productImageService.createProductImage(file);
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<byte[]> getProductImageById(@PathVariable Long id) {
-        byte[] image = productImageService.getProductImageById(id);
-        return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.valueOf("image/png")).body(image);
-    }
 
 }

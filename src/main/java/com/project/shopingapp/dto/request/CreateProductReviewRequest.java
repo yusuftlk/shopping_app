@@ -11,7 +11,6 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder
 public class CreateProductReviewRequest {
-    private Long id;
     private Long productId;
     private Long userId;
     private String review;

@@ -19,6 +19,7 @@ import java.util.Date;
 @Table(name = "orders")
 public class Order {
     @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -44,4 +45,13 @@ public class Order {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
     private LocalDateTime orderDate;
     private Boolean status;
+
+    public Order(User user, UserAddress userAddress, Product product, String information, LocalDateTime orderDate, Boolean status) {
+        this.user = user;
+        this.userAddress = userAddress;
+        this.product = product;
+        this.information = information;
+        this.orderDate = orderDate;
+        this.status = status;
+    }
 }
