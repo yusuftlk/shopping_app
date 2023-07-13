@@ -3,6 +3,7 @@ package com.project.shopingapp.service;
 import com.project.shopingapp.dto.CategoryDto;
 import com.project.shopingapp.dto.CategoryDtoConverter;
 import com.project.shopingapp.dto.request.CreateCategoryRequest;
+import com.project.shopingapp.exception.CategoryNotFoundException;
 import com.project.shopingapp.model.Category;
 import com.project.shopingapp.repository.CategoryRepository;
 import org.springframework.stereotype.Service;
@@ -26,12 +27,14 @@ public class CategoryService {
         return categoryList.stream().map(categoryDtoConverter::convert).collect(Collectors.toList());
     }
 
-    protected Category findCustomerById(Long id){
-        Category category = categoryRepository.findById(id).orElseThrow(null);
+    protected Category findCategoryById(Long id){
+        Category category = categoryRepository.findById(id).orElseThrow(() ->
+                new CategoryNotFoundException("Category Not Found id = " + id));
         return category;
     }
+
     public CategoryDto getCategoryById(Long id){
-        Category category = categoryRepository.findById(id).orElseThrow(null);
+        Category category = findCategoryById(id);
         return categoryDtoConverter.convert(category);
     }
 
@@ -43,6 +46,7 @@ public class CategoryService {
         return categoryDtoConverter.convert(categoryRepository.save(category));
     }
     public void deleteCategory(Long id) {
+        findCategoryById(id);
         categoryRepository.deleteById(id);
     }
 }

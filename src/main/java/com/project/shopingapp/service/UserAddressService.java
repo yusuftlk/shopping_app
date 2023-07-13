@@ -4,6 +4,7 @@ import com.project.shopingapp.dto.UserAddressDto;
 import com.project.shopingapp.dto.UserAddressDtoConverter;
 import com.project.shopingapp.dto.request.CreateUserAddressRequest;
 import com.project.shopingapp.dto.request.UpdateUserAddressRequest;
+import com.project.shopingapp.exception.UserAddressNotFoundException;
 import com.project.shopingapp.model.User;
 import com.project.shopingapp.model.UserAddress;
 import com.project.shopingapp.repository.UserAddressRepository;
@@ -38,7 +39,7 @@ public class UserAddressService {
     }
 
     public UserAddressDto updateUserAddress(Long id, UpdateUserAddressRequest updateUserAddressRequest) {
-        UserAddress userAddress = userAddressRepository.findById(id).orElse(null);
+        UserAddress userAddress = findUserAddressById(id);
 
         userAddress.setAddressText(updateUserAddressRequest.getAddressText());
         userAddress.setCity(updateUserAddressRequest.getCity());
@@ -49,11 +50,11 @@ public class UserAddressService {
 
     public UserAddressDto getUserAddressById(Long id) {
 
-        return userAddressDtoConverter.converter(userAddressRepository.findById(id).orElse(null));
+        return userAddressDtoConverter.converter(findUserAddressById(id));
     }
 
     public void deleteUserAddressById(Long id) {
-
+        findUserAddressById(id);
         userAddressRepository.deleteById(id);
     }
 
@@ -68,7 +69,7 @@ public class UserAddressService {
         return userAddressList.stream().map(userAddressDtoConverter::converter).collect(Collectors.toList());
     }
 
-    public UserAddress findUserAddressById(Long userAddressId) {
-        return userAddressRepository.findById(userAddressId).orElse(null);
+    protected UserAddress findUserAddressById(Long id) {
+        return userAddressRepository.findById(id).orElseThrow(() -> new UserAddressNotFoundException("User Address Found Found Exception id = " + id));
     }
 }

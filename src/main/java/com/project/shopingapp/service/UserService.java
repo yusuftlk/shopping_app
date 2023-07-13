@@ -4,6 +4,7 @@ import com.project.shopingapp.dto.UserDto;
 import com.project.shopingapp.dto.UserDtoConverter;
 import com.project.shopingapp.dto.request.CreateUserRequest;
 import com.project.shopingapp.dto.request.UpdateUserRequest;
+import com.project.shopingapp.exception.UserNotFoundException;
 import com.project.shopingapp.model.User;
 import com.project.shopingapp.model.UserAddress;
 import com.project.shopingapp.repository.UserRepository;
@@ -56,11 +57,12 @@ public class UserService {
     }
     public void deleteUser(Long id) {
 
+        findUserById(id);
         userRepository.deleteById(id);
     }
 
     public User findUserById(Long userId) {
 
-        return userRepository.findById(userId).orElseThrow(null);
+        return userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException("User Not Found id = " + userId));
     }
 }

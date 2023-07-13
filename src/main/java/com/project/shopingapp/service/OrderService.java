@@ -4,6 +4,7 @@ import com.project.shopingapp.dto.OrderDto;
 import com.project.shopingapp.dto.OrderDtoConverter;
 import com.project.shopingapp.dto.request.CreateOrderRequest;
 import com.project.shopingapp.dto.request.UpdateOrderRequest;
+import com.project.shopingapp.exception.OrderNotFoundException;
 import com.project.shopingapp.model.Order;
 import com.project.shopingapp.model.Product;
 import com.project.shopingapp.model.User;
@@ -53,7 +54,7 @@ public class OrderService {
     }
 
     public OrderDto getOrderById(Long id) {
-        return orderDtoConverter.convert(orderRepository.findById(id).orElse(null));
+        return orderDtoConverter.convert(findOrderById(id));
     }
 
     public List<OrderDto> getOrdersByUserId(Optional<Long> userId) {
@@ -66,7 +67,7 @@ public class OrderService {
     }
 
     public OrderDto updateOrder(Long id, UpdateOrderRequest updateOrderRequest) {
-        Order order = orderRepository.findById(id).orElse(null);
+        Order order = findOrderById(id);
         UserAddress userAddress = userAddressService.findUserAddressById(updateOrderRequest.getUserAddressId());
         order.setInformation(updateOrderRequest.getInformation());
         order.setUserAddress(userAddress);
@@ -76,5 +77,11 @@ public class OrderService {
 
     public void deleteOrder(Long id) {
         orderRepository.deleteById(id);
+    }
+
+    protected Order findOrderById(Long id){
+        Order order = orderRepository.findById(id).orElseThrow(() ->
+                new OrderNotFoundException("Order Not Found id = " + id));
+        return order;
     }
 }

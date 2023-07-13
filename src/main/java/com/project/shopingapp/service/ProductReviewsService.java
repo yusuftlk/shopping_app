@@ -4,6 +4,7 @@ import com.project.shopingapp.dto.ProductReviewsDto;
 import com.project.shopingapp.dto.ProductReviewsDtoConverter;
 import com.project.shopingapp.dto.request.CreateProductReviewRequest;
 import com.project.shopingapp.dto.request.UpdateProductReviewRequest;
+import com.project.shopingapp.exception.ProductReviewNotFoundException;
 import com.project.shopingapp.model.Product;
 import com.project.shopingapp.model.ProductReviews;
 import com.project.shopingapp.model.User;
@@ -53,7 +54,7 @@ public class ProductReviewsService {
 
     public ProductReviewsDto updateProductReviewById(Long id, UpdateProductReviewRequest updateProductReviewRequest) {
 
-        ProductReviews productReviews = productReviewsRepository.findById(id).orElse(null);
+        ProductReviews productReviews = findProductReviewsById(id);
         productReviews.setReview(updateProductReviewRequest.getReview());
 
         return productReviewsDtoConverter.convert(productReviewsRepository.save(productReviews));
@@ -61,7 +62,12 @@ public class ProductReviewsService {
     }
 
     public void deleteProductReviewById(Long id) {
-
+        findProductReviewsById(id);
         productReviewsRepository.deleteById(id);
+    }
+
+    protected ProductReviews findProductReviewsById(Long id){
+        ProductReviews productReviews = productReviewsRepository.findById(id).orElseThrow(() -> new ProductReviewNotFoundException("Product Review Not Found id = " + id));
+        return  productReviews;
     }
 }

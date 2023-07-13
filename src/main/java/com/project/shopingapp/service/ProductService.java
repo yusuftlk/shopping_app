@@ -4,6 +4,7 @@ import com.project.shopingapp.dto.ProductDto;
 import com.project.shopingapp.dto.ProductDtoConverter;
 import com.project.shopingapp.dto.request.CreateProductRequest;
 import com.project.shopingapp.dto.request.UpdateProductRequest;
+import com.project.shopingapp.exception.ProductNotFoundException;
 import com.project.shopingapp.model.Category;
 import com.project.shopingapp.model.Product;
 import com.project.shopingapp.repository.ProductRepository;
@@ -51,15 +52,16 @@ public class ProductService {
     }
     public ProductDto getProductById(Long id) {
 
-        return productDtoConverter.convert(productRepository.findById(id).orElse(null));
+        return productDtoConverter.convert(findProductById(id));
     }
 
-    public Product findProductById(Long id){
-        return productRepository.findById(id).orElse(null);
+    protected Product findProductById(Long id){
+
+        return productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException("Product Not Found id = " + id));
     }
 
     public ProductDto createProduct(CreateProductRequest createProductRequest) {
-        Category category = categoryService.findCustomerById(createProductRequest.getCategoryId());
+        Category category = categoryService.findCategoryById(createProductRequest.getCategoryId());
 
         Product product = new Product(
                 category,
@@ -74,8 +76,8 @@ public class ProductService {
     }
 
     public ProductDto updateProductById(Long id, UpdateProductRequest updateProductRequest) {
-        Product product = productRepository.findById(id).orElse(null);
-        Category category = categoryService.findCustomerById(updateProductRequest.getCategoryId());
+        Product product = findProductById(id);
+        Category category = categoryService.findCategoryById(updateProductRequest.getCategoryId());
 
         product.setCategory(category);
         product.setProductCode(updateProductRequest.getProductCode());
@@ -88,6 +90,7 @@ public class ProductService {
     }
     public void deleteProductById(Long id) {
 
+        findProductById(id);
         productRepository.deleteById(id);
     }
 }
