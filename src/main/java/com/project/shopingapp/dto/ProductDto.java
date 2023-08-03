@@ -16,6 +16,7 @@ import java.util.List;
 @ToString
 @EqualsAndHashCode
 public class ProductDto {
+    private Long id;
     private CategoryDto category;
     private String productCode;
     private String name;

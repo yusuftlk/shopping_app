@@ -25,7 +25,7 @@ public class UserService {
     }
     public List<UserDto> getAllUsers() {
         List<User> userList = userRepository.findAll();
-        return userList.stream().map(userDtoConverter::convert).collect(Collectors.toList());
+        return userDtoConverter.convert(userList);
     }
 
     public UserDto createUser(CreateUserRequest createUserRequest) {

@@ -61,7 +61,7 @@ public class OrderService {
         if (userId.isPresent()){
 
             List<Order> orderList = orderRepository.findByUserId(userId);
-            return orderList.stream().map(orderDtoConverter::convert).collect(Collectors.toList());
+            return orderDtoConverter.convert(orderList);
         }
         else return null;
     }

@@ -28,27 +28,16 @@ public class ProductService {
         this.categoryService = categoryService;
     }
 
-    public List<ProductDto> getAllProducts(Optional<Long> categoryId, Optional<String> productCode, Optional<String> productName) {
+    public List<ProductDto> getAllProducts(Optional<String> categoryName) {
         List<Product> productList;
 
-        if(categoryId.isPresent() && productCode.isPresent()){
-            productList = productRepository.findByCategoryIdAndProductCode(categoryId, productCode);
-        }
-        else if(categoryId.isPresent() && productName.isPresent()){
-            productList = productRepository.findByCategoryIdAndName(categoryId, productName);
-        }
-        else if(productCode.isPresent()){
-            productList = productRepository.findByProductCode(productCode);
-        }
-        else if(productName.isPresent()){
-            productList = productRepository.findByName(productName);
-        }
-        else if (categoryId.isPresent())
-            productList = productRepository.findByCategoryId(categoryId);
+        if (categoryName.isPresent())
+            productList = productRepository.findByCategoryName(categoryName);
         else
             productList = productRepository.findAll();
 
-        return productList.stream().map(productDtoConverter::convert).collect(Collectors.toList());
+        System.out.println();
+        return productDtoConverter.convert(productList);
     }
     public ProductDto getProductById(Long id) {
 

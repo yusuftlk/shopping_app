@@ -11,8 +11,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@ToString
 @EqualsAndHashCode
+@ToString
 public class UserDto {
     private String name;
     private String surname;

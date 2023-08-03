@@ -4,6 +4,7 @@ import com.project.shopingapp.model.Product;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class ProductDtoConverter {
@@ -24,7 +25,7 @@ public class ProductDtoConverter {
         List<ProductReviewsDto> productReviewsDtoList = from.getProductReviews().stream().map(productReviewsDtoConverter::convert).toList();
         List<ProductImageDto> productImageDtoList = from.getProductImages().stream().map(productImageDtoConverter::convert).toList();
 
-        return new ProductDto(categoryDto,
+        return new ProductDto(from.getId(), categoryDto,
                 from.getProductCode(),
                 from.getName(),
                 from.getPrice(),
@@ -32,6 +33,10 @@ public class ProductDtoConverter {
                 from.getDescription(),
                 productReviewsDtoList,
                 productImageDtoList);
+    }
+
+    public List<ProductDto> convert(List<Product> productList){
+        return productList.stream().map(this::convert).collect(Collectors.toList());
     }
 
 }

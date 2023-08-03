@@ -47,8 +47,7 @@ public class ProductReviewsService {
 
         List<ProductReviews> productReviewsList = productReviewsRepository.findByProductId(productId);
 
-        return productReviewsList.stream().map(productReviewsDtoConverter::convert)
-                .collect(Collectors.toList());
+        return productReviewsDtoConverter.convert(productReviewsList);
 
     }
 

@@ -24,10 +24,11 @@ public class CategoryController {
 
         return ResponseEntity.ok(categoryService.getAllCategories());
     }
-    @GetMapping("/{id}")
-    public CategoryDto getCategoryById(@PathVariable Long id){
 
-        return categoryService.getCategoryById(id);
+    @GetMapping("/{name}")
+    public CategoryDto getCategoryByName(@PathVariable String name){
+
+        return categoryService.getCategoryByName(name);
     }
     @PostMapping()
     public  ResponseEntity<Object> createCategory(@RequestBody CreateCategoryRequest createCategoryRequest){

@@ -20,8 +20,8 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ProductDto>> getAllProducts(@RequestParam Optional<Long> categoryId, @RequestParam Optional<String> productCode, @RequestParam Optional<String> productName){
-        return ResponseEntity.ok(productService.getAllProducts(categoryId, productCode, productName));
+    public ResponseEntity<List<ProductDto>> getAllProducts(@RequestParam Optional<String> categoryName){
+        return ResponseEntity.ok(productService.getAllProducts(categoryName));
     }
 
     @PostMapping
@@ -33,6 +33,7 @@ public class ProductController {
     public ResponseEntity<ProductDto> getProductById(@PathVariable Long id){
         return ResponseEntity.ok(productService.getProductById(id));
     }
+
     @PutMapping("/{id}")
     public  ResponseEntity<ProductDto> updateProductById(@PathVariable Long id, @RequestBody UpdateProductRequest updateProductRequest){
         return ResponseEntity.ok(productService.updateProductById(id, updateProductRequest));

@@ -24,18 +24,13 @@ public class CategoryService {
 
     public List<CategoryDto> getAllCategories (){
         List<Category> categoryList = categoryRepository.findAll();
-        return categoryList.stream().map(categoryDtoConverter::convert).collect(Collectors.toList());
+        return categoryDtoConverter.convert(categoryList);
     }
 
     protected Category findCategoryById(Long id){
         Category category = categoryRepository.findById(id).orElseThrow(() ->
                 new CategoryNotFoundException("Category Not Found id = " + id));
         return category;
-    }
-
-    public CategoryDto getCategoryById(Long id){
-        Category category = findCategoryById(id);
-        return categoryDtoConverter.convert(category);
     }
 
     public CategoryDto createCategory(CreateCategoryRequest createCategoryRequest) {
@@ -48,5 +43,11 @@ public class CategoryService {
     public void deleteCategory(Long id) {
         findCategoryById(id);
         categoryRepository.deleteById(id);
+    }
+
+    public CategoryDto getCategoryByName(String name) {
+        Category category = categoryRepository.findByCategoryName(name);
+
+        return categoryDtoConverter.convert(category);
     }
 }

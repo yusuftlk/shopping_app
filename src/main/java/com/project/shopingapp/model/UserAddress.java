@@ -12,7 +12,9 @@ import org.hibernate.annotations.OnDeleteAction;
 @NoArgsConstructor
 @Builder
 @Entity
+@EqualsAndHashCode
 @Table(name = "useraddress")
+
 public class UserAddress {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)

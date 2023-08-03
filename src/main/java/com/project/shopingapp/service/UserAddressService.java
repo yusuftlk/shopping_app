@@ -35,7 +35,7 @@ public class UserAddressService {
                 createUserAddressRequest.getCity(),
                 createUserAddressRequest.getDistrict());
 
-        return userAddressDtoConverter.converter(userAddressRepository.save(userAddress));
+        return userAddressDtoConverter.convert(userAddressRepository.save(userAddress));
     }
 
     public UserAddressDto updateUserAddress(Long id, UpdateUserAddressRequest updateUserAddressRequest) {
@@ -45,12 +45,12 @@ public class UserAddressService {
         userAddress.setCity(updateUserAddressRequest.getCity());
         userAddress.setDistrict(updateUserAddressRequest.getDistrict());
 
-        return userAddressDtoConverter.converter(userAddressRepository.save(userAddress));
+        return userAddressDtoConverter.convert(userAddressRepository.save(userAddress));
     }
 
     public UserAddressDto getUserAddressById(Long id) {
 
-        return userAddressDtoConverter.converter(findUserAddressById(id));
+        return userAddressDtoConverter.convert(findUserAddressById(id));
     }
 
     public void deleteUserAddressById(Long id) {
@@ -66,7 +66,7 @@ public class UserAddressService {
         else
             userAddressList = userAddressRepository.findAll();
 
-        return userAddressList.stream().map(userAddressDtoConverter::converter).collect(Collectors.toList());
+        return userAddressDtoConverter.convert(userAddressList);
     }
 
     protected UserAddress findUserAddressById(Long id) {

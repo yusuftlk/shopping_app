@@ -1,7 +1,11 @@
 package com.project.shopingapp.dto;
 
+import com.project.shopingapp.model.Category;
 import com.project.shopingapp.model.Order;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class OrderDtoConverter {
@@ -18,9 +22,13 @@ public class OrderDtoConverter {
 
     public OrderDto convert(Order from){
         return new OrderDto(userDtoConverter.convert(from.getUser()),
-                userAddressDtoConverter.converter(from.getUserAddress()),
+                userAddressDtoConverter.convert(from.getUserAddress()),
                 productDtoConverter.convert(from.getProduct()),
                 from.getInformation(),
                 from.getOrderDate());
+    }
+
+    public List<OrderDto> convert(List<Order> orderList){
+        return orderList.stream().map(this::convert).collect(Collectors.toList());
     }
 }
