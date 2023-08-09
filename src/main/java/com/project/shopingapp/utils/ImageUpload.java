@@ -12,28 +12,26 @@ import java.nio.file.StandardCopyOption;
 public class ImageUpload {
     private final String UPLOAD_FOLDER = "C:\\shopingapp\\src\\main\\java\\com\\project\\shopingapp\\img";
 
-    public boolean uploadImage(MultipartFile imageProduct){
+
+    public boolean uploadFile(MultipartFile file) {
         boolean isUpload = false;
         try {
-            Files.copy(imageProduct.getInputStream(),
-                    Paths.get(UPLOAD_FOLDER + File.separator, imageProduct.getOriginalFilename()),
-                    StandardCopyOption.REPLACE_EXISTING);
+            Files.copy(file.getInputStream(), Paths.get(UPLOAD_FOLDER + File.separator + file.getOriginalFilename()) , StandardCopyOption.REPLACE_EXISTING);
             isUpload = true;
-
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return isUpload;
     }
 
-    public boolean checkExisted(MultipartFile imageProduct){
-        boolean isExisted = false;
+    public boolean checkExist(MultipartFile multipartFile){
+        boolean isExist = false;
         try {
-            File file = new File(UPLOAD_FOLDER + "\\" + imageProduct.getOriginalFilename());
-            isExisted = file.exists();
+            File file = new File(UPLOAD_FOLDER +"\\" + multipartFile.getOriginalFilename());
+            isExist = file.exists();
         }catch (Exception e){
             e.printStackTrace();
         }
-        return isExisted;
+        return isExist;
     }
 }

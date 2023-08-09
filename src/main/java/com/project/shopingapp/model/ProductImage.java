@@ -1,10 +1,13 @@
 package com.project.shopingapp.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.project.shopingapp.dto.ProductImageDto;
+import com.project.shopingapp.dto.request.CreateProductImageRequest;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @Setter
@@ -20,14 +23,13 @@ public class ProductImage {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
-    private String name;
-    private String type;
+
+    @Lob
+    @Column(columnDefinition = "MEDIUMBLOB")
     private String image;
 
-    public ProductImage(Product product, String name, String type, String image) {
+    public ProductImage(Product product, String image) {
         this.product = product;
-        this.name = name;
-        this.type = type;
         this.image = image;
     }
 }

@@ -12,5 +12,4 @@ import lombok.*;
 @EqualsAndHashCode
 public class ProductImageDto {
     private String image;
-    private String name;
 }

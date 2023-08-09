@@ -1,5 +1,6 @@
 package com.project.shopingapp.controller;
 
+import com.project.shopingapp.dto.ProductImageDto;
 import com.project.shopingapp.dto.request.CreateProductImageRequest;
 import com.project.shopingapp.model.ProductImage;
 import com.project.shopingapp.service.ProductImageService;
@@ -19,5 +20,9 @@ public class ProductImageController {
     public ProductImageController(ProductImageService productImageService) {
         this.productImageService = productImageService;
     }
-
+    @PostMapping
+    public ResponseEntity<ProductImageDto> addImage(@RequestParam("productId") Long productId,
+                                                    @RequestParam("imageProduct") MultipartFile imageProduct){
+        return ResponseEntity.ok(productImageService.uploadImage(imageProduct, productId));
+    }
 }

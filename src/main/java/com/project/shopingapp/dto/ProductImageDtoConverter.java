@@ -7,7 +7,12 @@ import org.springframework.stereotype.Component;
 public class ProductImageDtoConverter {
     public ProductImageDto convert(ProductImage from){
 
-        return new ProductImageDto(from.getImage(), from.getName());
+        return new ProductImageDto(from.getImage());
+    }
+
+    public static ProductImageDto convertStatic(ProductImage from){
+
+        return new ProductImageDto(from.getImage());
     }
 
 
